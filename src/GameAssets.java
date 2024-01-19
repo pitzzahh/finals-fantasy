@@ -59,13 +59,13 @@ public class GameAssets implements Colors {
     };
 
     protected String playerOneAttack(Player playerOne, Player playerTwo) {
-        return playerOne.getColor() + "\t\t  0   /  " + "\t\t" + playerTwo.getColor() + "  |  0  \n" +
-                playerOne.getColor() + "\t\t--+--/   " + "\t\t" + playerTwo.getColor() + "  |--+--\n" +
-                playerOne.getColor() + "\t\t / \\    " + "\t\t" + playerTwo.getColor() + "     / \\\n" +
-                playerOne.getColor() + "\t\t/   \\   " + "\t\t" + playerTwo.getColor() + "    /   \\\n" +
-                playerOne.getColor() + playerOne.getName() + RESET + " vs " + playerTwo.getColor() + playerTwo.getName() + "\n" +
-                generateHealthBar(playerOne.getLives()) + "||" + generateHealthBar(playerTwo.getLives()) + "\n" +
-                RED_BRIGHT + "\t\t (Attack)\t\t\t " + BLUE_BRIGHT + "(Defend)" + RESET;
+        return playerOne.getColor() + "\t\t  0   /" + "\t\t" + playerTwo.getColor() + "|  0  \n" +
+               playerOne.getColor() + "\t\t--+--/ " + "\t\t" + playerTwo.getColor() + "|--+--\n" +
+               playerOne.getColor() + "\t\t / \\  " + "\t\t" + playerTwo.getColor() + "  / \\\n" +
+               playerOne.getColor() + "\t\t/   \\ " + "\t\t" + playerTwo.getColor() + " /   \\\n"+
+               playerOne.getColor() + playerOne.getName() + RESET + " vs " + playerTwo.getColor() + playerTwo.getName() + "\n" +
+               generateHealthBar(playerOne.getLives()) + "||" + generateHealthBar(playerTwo.getLives()) + "\n" +
+               RED_BRIGHT + "\t\t (Attack)\t\t\t " + BLUE_BRIGHT + "(Defend)" + RESET;
     }
 
     private final String playerTwoAttack =
