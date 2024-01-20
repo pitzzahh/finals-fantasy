@@ -2,7 +2,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         GameSettings gameSettings = new GameSettings();
         if (args != null) {
             for (String arg : args) {
@@ -11,7 +11,7 @@ public class Main {
             }
         }
 
-        Game game = new Game(gameSettings);
+        Game game = new Game(gameSettings, new GameAssets(gameSettings));
         game.start(new Scanner(System.in));
     }
 }
