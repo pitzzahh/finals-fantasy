@@ -3,37 +3,30 @@ import java.util.Random;
 public class GameSettings {
 
     protected final Random random = new Random();
-    protected final GameAssets assets = new GameAssets();
+    protected GameAssets assets;
     protected boolean clearConsole;
+    protected boolean colored;
     protected GameMode gameMode;
     protected Player playerOne;
     protected Player playerTwo;
-    protected boolean exit = false;
+    protected boolean exit;
 
     public GameSettings() {
-        gameMode = GameMode.SINGLE_PLAYER;
-        playerOne = new Player(
-                generateHeroName(assets.heroNames, assets.heroNicknames, random),
-                assets.generateRandomColor(random)
-        );
-        playerTwo = new Player(
-                generateHeroName(assets.heroNames, assets.heroNicknames, random),
-                assets.generateRandomColor(random)
-        );
+        assets = new GameAssets(this);
     }
 
     public GameSettings(GameSettings gameSettings) {
         clearConsole = gameSettings.clearConsole;
+        colored = gameSettings.colored;
         gameMode = gameSettings.gameMode;
         playerOne = gameSettings.playerOne;
         playerTwo = gameSettings.playerTwo;
         exit = gameSettings.exit;
+        assets = new GameAssets(this);
     }
 
     protected String generateHeroName(String[] names, String[] nickNames, Random random) {
-        int nameIndex = random.nextInt(names.length);
-        int nickNameIndex = random.nextInt(nickNames.length);
-        return names[nameIndex] + " The " + nickNames[nickNameIndex];
+        return names[random.nextInt(names.length)] + " The " + nickNames[random.nextInt(nickNames.length)];
     }
 
     public void clearConsole(long delay) {
@@ -41,7 +34,7 @@ public class GameSettings {
             System.out.print("\033\143");
             System.out.flush();
             try {
-                Thread.sleep(delay * 1000);
+                Thread.sleep(delay);
             } catch (InterruptedException ignored) {
             }
         }
@@ -53,14 +46,5 @@ public class GameSettings {
         COMPUTER_ONLY
     }
 
-    protected static void printAnimatedText(String text, long delay) {
-        try {
-            for (char c : text.toCharArray()) {
-                System.out.print(c);
-                Thread.sleep(delay);
-            }
-        } catch (InterruptedException ignored) {
 
-        }
-    }
 }
