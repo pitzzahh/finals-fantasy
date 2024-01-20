@@ -3,47 +3,50 @@ import java.util.Scanner;
 
 public class Game extends GameSettings {
 
-
     public Game(GameSettings gameSettings) {
         super(gameSettings);
     }
 
     protected void start(Scanner scanner) {
-        printAnimatedText(super.assets.welcomeText, 0);
-        printAnimatedText(super.assets.gameTitle, 0);
+        printAnimatedText(super.welcomeText, 0);
+        printAnimatedText(super.gameTitle, 0);
         while (!exit) {
-            System.out.printf("SELECT %sGAME%s MODE%s\n", Colors.PURPLE, Colors.GREEN, Colors.RESET);
+            System.out.printf("SELECT %sGAME%s MODE%s\n",
+                    Color.PURPLE.value(),
+                    Color.GREEN.value(),
+                    Color.RESET.value()
+            );
             for (GameMode mode : GameMode.values()) {
                 System.out.printf("%s: %s%s %s: %s%s%s\n",
-                        Colors.GREEN,
-                        Colors.PURPLE,
+                        Color.GREEN.value(),
+                        Color.PURPLE.value(),
                         mode.ordinal() + 1,
-                        Colors.GREEN,
-                        Colors.BLUE,
+                        Color.GREEN.value(),
+                        Color.BLUE.value(),
                         mode.name(),
-                        Colors.RESET
+                        Color.RESET.value()
                 );
             }
             System.out.printf("%s: %s%s %s: %s%s%s\n",
-                    Colors.GREEN,
-                    Colors.PURPLE,
+                    Color.GREEN.value(),
+                    Color.PURPLE.value(),
                     GameMode.values().length + 1,
-                    Colors.GREEN,
-                    Colors.RED,
+                    Color.GREEN.value(),
+                    Color.RED.value(),
                     "Exit",
-                    Colors.RESET
+                    Color.RESET.value()
             );
-            System.out.printf("%s>>>:%s ", Colors.YELLOW, Colors.RESET);
+            System.out.printf("%s>>>:%s ", Color.YELLOW.value(), Color.RESET.value());
             switch (scanner.next()) {
                 case "1":
                     gameMode = GameMode.SINGLE_PLAYER;
                     playerOne = new Player(
-                            generateHeroName(super.assets.heroNames, super.assets.heroNicknames, random),
-                            super.assets.generateRandomColor(random)
+                            generateHeroName(super.heroNames, super.heroNicknames, random),
+                            super.generateRandomColor(random)
                     );
                     playerTwo = new Player(
-                            generateHeroName(super.assets.heroNames, super.assets.heroNicknames, random),
-                            super.assets.generateRandomColor(random)
+                            generateHeroName(super.heroNames, super.heroNicknames, random),
+                            super.generateRandomColor(random)
                     );
                     break;
                 case "2":
