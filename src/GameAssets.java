@@ -38,6 +38,15 @@ public class GameAssets {
                 "╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝   \n" + colored(Color.RESET);
     }
 
+    protected String fight()
+    {
+        return colored(Color.RED_BOLD_BRIGHT) +
+                "\n" +
+                "┏┓┳┏┓┓┏┏┳┓╻\n" +
+                "┣ ┃┃┓┣┫ ┃ ┃\n" +
+                "┻ ┻┗┛┛┗ ┻ •\n" +
+                "           \n" + colored(Color.RESET);
+    }
 
     protected String[] heroNames = new String[]
             {
@@ -163,27 +172,25 @@ public class GameAssets {
     }
 
     protected Color generateRandomColor(Random random) {
-        List<Color> colors = Arrays.stream(Color.values())
-                .filter(color -> !color.name().matches(".*UNDERLINED.*|.*BACKGROUND|.*BACKGROUND.*|RED.*|BLUE_BRIGHT|CYAN.*|WHITE.*|RESET"))
-                .filter(color -> color.name().matches(".*BRIGHT"))
-                .collect(Collectors.toList());
+        List<Color> colors = filteredColors();
         Collections.shuffle(colors);
         return colors.get(random.nextInt(colors.size()));
+    }
+
+    protected List<Color> filteredColors() {
+        return Arrays.stream(Color.values())
+                .filter(color -> !color.name().matches(".*UNDERLINED.*|.*BACKGROUND|.*BACKGROUND.*|RED.*|BLUE.*|CYAN.*|WHITE.*|RESET|BLACK.*|"))
+                .filter(color -> color.name().matches(".*BRIGHT"))
+                .collect(Collectors.toList());
     }
 
     protected String generateHealthBar(int health) {
         int barLength = 30;
         int filledBlocks = (int) Math.ceil((double) health / 100 * barLength);
         String color = health >= 70 ? colored(Color.GREEN) : health >= 40 ? colored(Color.YELLOW) : colored(Color.RED);
-        StringBuilder healthBar = new StringBuilder(color);
-        for (int i1 = 0; i1 < filledBlocks; i1++) {
-            healthBar.append('█');
-        }
-        healthBar.append(colored(Color.RESET));
-        for (int i = 0; i < (barLength - filledBlocks); i++) {
-            healthBar.append(' ');
-        }
-        return healthBar.toString();
+        return color + "█".repeat(Math.max(0, filledBlocks)) +
+                colored(Color.RESET) +
+                " ".repeat(Math.max(0, (barLength - filledBlocks)));
     }
 
     protected String colored(Color color) {
