@@ -9,4 +9,5 @@ public interface Action {
      * A player can defend
      */
     void defend();
+    void rest();
 }
