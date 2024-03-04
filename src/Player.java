@@ -46,4 +46,9 @@ public class Player implements Action {
     public void defend() {
         setDamage(0);
     }
+
+    @Override
+    public void rest() {
+        setDamage(0);
+    }
 }
