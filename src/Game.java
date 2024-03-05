@@ -1,7 +1,6 @@
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The Game class extends the GameSettings class and is responsible for managing the game flow.
@@ -96,7 +95,7 @@ public class Game {
                                 }
                             } while (humanName.isEmpty());
 
-                            AtomicReference<Color> humanSelectedColor = new AtomicReference<>(Color.BLACK);
+                            Color humanSelectedColor = Color.BLACK;
                             Optional<Color> optionalColor;
                             do {
                                 System.out.printf("%sHello mighty %s%s,%s please select your desired color%s\n",
@@ -116,19 +115,17 @@ public class Game {
 
                                 optionalColor = assets.filteredColors()
                                         .stream()
-                                        .toList()
-                                        .stream()
                                         .filter(color -> Objects.equals(String.valueOf(color.ordinal()), colorInput))
                                         .findAny();
 
                                 if (optionalColor.isPresent()) {
                                     System.out.printf("You selected %s%s%s\n", optionalColor.get().value(), optionalColor.get().name(), Color.RESET.value());
-                                    humanSelectedColor.set(optionalColor.get());
+                                    humanSelectedColor = optionalColor.get();
                                 } else {
                                     System.out.printf("\n%sInvalid color%s\n\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
                                 }
                             } while (optionalColor.isEmpty());
-                            gameSettings.playerOne = new Player(humanName, humanSelectedColor.get());
+                            gameSettings.playerOne = new Player(humanName, humanSelectedColor);
 
                             // print a ready counter with colors
                         }
