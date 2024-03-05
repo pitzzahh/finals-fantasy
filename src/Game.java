@@ -94,37 +94,38 @@ public class Game {
                                     System.out.printf("%sPlease identify yourself mighty knight!%s\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
                                 }
                             } while (humanName.isEmpty());
-
                             Color humanSelectedColor = Color.BLACK;
-                            Optional<Color> optionalColor;
-                            do {
-                                System.out.printf("%sHello mighty %s%s,%s please select your desired color%s\n",
-                                        assets.colored(Color.PURPLE_BOLD),
-                                        assets.colored(Color.RESET),
-                                        humanName,
-                                        assets.colored(Color.PURPLE),
-                                        assets.colored(Color.RESET)
-                                );
-                                System.out.printf("%s:Available colors (Pick the number):%s\n", assets.colored(Color.PURPLE_BOLD_BRIGHT), assets.colored(Color.RESET));
+                            if(gameSettings.colored) {
+                                Optional<Color> optionalColor;
+                                do {
+                                    System.out.printf("%sHello mighty %s%s,%s please select your desired color%s\n",
+                                            assets.colored(Color.PURPLE_BOLD),
+                                            assets.colored(Color.RESET),
+                                            humanName,
+                                            assets.colored(Color.PURPLE),
+                                            assets.colored(Color.RESET)
+                                    );
+                                    System.out.printf("%s:Available colors (Pick the number):%s\n", assets.colored(Color.PURPLE_BOLD_BRIGHT), assets.colored(Color.RESET));
 
-                                assets.filteredColors()
-                                        .forEach(color -> System.out.printf("%d: %s%s%s\n", color.ordinal(), color.value(), color.name(), Color.RESET.value()));
+                                    assets.filteredColors()
+                                            .forEach(color -> System.out.printf("%d: %s%s%s\n", color.ordinal(), color.value(), color.name(), Color.RESET.value()));
 
-                                System.out.print("Enter your color >>>: ");
-                                String colorInput = scanner.nextLine().toLowerCase().trim();
+                                    System.out.print("Enter your color >>>: ");
+                                    String colorInput = scanner.nextLine().toLowerCase().trim();
 
-                                optionalColor = assets.filteredColors()
-                                        .stream()
-                                        .filter(color -> Objects.equals(String.valueOf(color.ordinal()), colorInput))
-                                        .findAny();
+                                    optionalColor = assets.filteredColors()
+                                            .stream()
+                                            .filter(color -> Objects.equals(String.valueOf(color.ordinal()), colorInput))
+                                            .findAny();
 
-                                if (optionalColor.isPresent()) {
-                                    System.out.printf("You selected %s%s%s\n", optionalColor.get().value(), optionalColor.get().name(), Color.RESET.value());
-                                    humanSelectedColor = optionalColor.get();
-                                } else {
-                                    System.out.printf("\n%sInvalid color%s\n\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
-                                }
-                            } while (optionalColor.isEmpty());
+                                    if (optionalColor.isPresent()) {
+                                        System.out.printf("You selected %s%s%s\n", optionalColor.get().value(), optionalColor.get().name(), Color.RESET.value());
+                                        humanSelectedColor = optionalColor.get();
+                                    } else {
+                                        System.out.printf("\n%sInvalid color%s\n\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
+                                    }
+                                } while (optionalColor.isEmpty());
+                            }
                             gameSettings.playerOne = new Player(humanName, humanSelectedColor);
 
                             // print a ready counter with colors
@@ -200,6 +201,7 @@ public class Game {
                                             gameSettings.playerOne.getDamage() +
                                                     gameSettings.playerTwo.getLives()
                                     );
+                                    gameSettings.playerOne.setDamage(0);
                                     System.out.println(assets.playerOneAttack());
                                 } else if (computerChoice == 2) { // both attack
                                     gameSettings.playerTwo.attack(gameSettings.playerOne);
