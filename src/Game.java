@@ -124,7 +124,7 @@ public class Game {
                                     } else {
                                         System.out.printf("\n%sInvalid color%s\n\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
                                     }
-                                } while (optionalColor.isPresent());
+                                } while (optionalColor.isEmpty());
                             }
                             gameSettings.playerOne = new Player(humanName, humanSelectedColor);
 
@@ -177,7 +177,7 @@ public class Game {
     @SuppressWarnings("BusyWait")
     private void gamePlay(Scanner scanner) throws InterruptedException {
         while (gameSettings.playerOne.getLives() >= 1 && gameSettings.playerTwo.getLives() >= 1) {
-            int computerChoice = gameSettings.random.nextInt(5);
+            int computerChoice = gameSettings.random.nextInt(5) + 1;
             switch (gameMode) {
                 case HUMAN_VS_COMPUTER:
                     String userInput;
@@ -193,7 +193,7 @@ public class Game {
                         switch (userInput) {
                             case "1":
                                 gameSettings.playerOne.attack(gameSettings.playerTwo);
-                                computerChoice = gameSettings.random.nextInt(4) + 1;
+                                computerChoice = gameSettings.random.nextInt(3) + 1;
                                 if (computerChoice == 1) { // one attack
                                     gameSettings.playerTwo.defend();
                                     // put back player two live because it defends
@@ -206,15 +206,16 @@ public class Game {
                                 } else if (computerChoice == 2) { // both attack
                                     gameSettings.playerTwo.attack(gameSettings.playerOne);
                                     System.out.println(assets.bothAttack());
-                                } else if (computerChoice == 3) { // two rest and one attack
+                                } else { // two rest and one attack
                                     gameSettings.playerTwo.rest();
-                                    System.out.println(assets.playerOneAttack());
+                                    System.out.println(assets.playerOneAttackPlayerTwoRest());
                                 }
                                 break;
                             case "2":
                                 gameSettings.playerOne.defend();
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
+                                    gameSettings.playerTwo.setDamage(0);
                                     System.out.println(assets.playerTwoAttack());
                                 } else { // both defend
                                     gameSettings.playerTwo.defend();
@@ -226,7 +227,7 @@ public class Game {
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
                                     gameSettings.playerTwo.attack(gameSettings.playerOne);
-                                    System.out.println(assets.playerTwoAttack());
+                                    System.out.println(assets.playerOneRestPlayerTwoTwoAttack());
                                 } else {
                                     gameSettings.playerTwo.rest();
                                     System.out.println(assets.bothRest());
@@ -239,17 +240,17 @@ public class Game {
                     } while (!userInput.equals("1") && !userInput.equals("2") && !userInput.equals("3"));
                     break;
                 case COMPUTER_VS_COMPUTER:
-                    if (computerChoice == 0) { // one attack
+                    if (computerChoice == 1) { // one attack
                         gameSettings.playerTwo.defend();
                         System.out.println(assets.playerOneAttack());
-                    } else if (computerChoice == 1) { // two attack
+                    } else if (computerChoice == 2) { // two attack
                         gameSettings.playerOne.defend();
                         System.out.println(assets.playerTwoAttack());
-                    } else if (computerChoice == 2) { // both attack
+                    } else if (computerChoice == 3) { // both attack
                         gameSettings.playerOne.attack(gameSettings.playerTwo);
                         gameSettings.playerTwo.attack(gameSettings.playerOne);
                         System.out.println(assets.bothAttack());
-                    } else if (computerChoice == 3) { // both defend
+                    } else if (computerChoice == 4) { // both defend
                         gameSettings.playerOne.defend();
                         gameSettings.playerTwo.defend();
                         System.out.println(assets.bothDefend());
