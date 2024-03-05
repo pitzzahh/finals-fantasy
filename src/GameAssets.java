@@ -38,8 +38,7 @@ public class GameAssets {
                 "╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝   \n" + colored(Color.RESET);
     }
 
-    protected String fight()
-    {
+    protected String fight() {
         return colored(Color.RED_BOLD_BRIGHT) +
                 "\n" +
                 "┏┓┳┏┓┓┏┏┳┓╻\n" +
@@ -103,18 +102,37 @@ public class GameAssets {
                 colored(settings.playerOne.getColor()) + "\t\t / \\  " + "\t\t" + colored(settings.playerTwo.getColor()) + "  / \\ " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
                 colored(settings.playerOne.getColor()) + "\t\t/   \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + " /   \\\n" +
                 colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
-                colored(Color.RED_BRIGHT) + "\t\t (Attack)\t\t\t " + colored(Color.BLUE_BRIGHT) + "(Defend)\n" + colored(Color.RESET);
+                colored(Color.RED_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Attack)\t\t\t " + colored(Color.BLUE_BRIGHT) + "(Defend)\n" + colored(Color.RESET);
+    }
+
+    protected String playerOneAttackPlayerTwoRest() {
+        return String.format("%s%s %sＡＴＴＡＣＫＳ %s%s with %d Damage\n", colored(settings.playerOne.getColor()), settings.playerOne.getName(), colored(Color.RED_BRIGHT), colored(settings.playerTwo.getColor()), settings.playerTwo.getName(), settings.playerOne.getDamage()) +
+                colored(settings.playerOne.getColor()) + "\t\t  0   /" + "\t\t" + colored(settings.playerTwo.getColor()) + "  0 \n" +
+                colored(settings.playerOne.getColor()) + "\t\t--+--/ " + "\t\t" + colored(settings.playerTwo.getColor()) + "--+-- " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerOne.getName(), settings.playerOne.getLives(), generateHealthBar(settings.playerOne.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t / \\  " + "\t\t" + colored(settings.playerTwo.getColor()) + " / \\ " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t/   \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "/   \\\n" +
+                colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
+                colored(Color.RED_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Attack)\t\t\t " + colored(Color.GREEN_BRIGHT) + "(Rest)\n" + colored(Color.RESET);
     }
 
     protected String playerTwoAttack() {
-        return
-                String.format("%s%s %sＡＴＴＡＣＫＳ %s%s with %d Damage\n", colored(settings.playerTwo.getColor()), settings.playerTwo.getName(), colored(Color.RED_BRIGHT), colored(settings.playerOne.getColor()), settings.playerOne.getName(), settings.playerTwo.getDamage()) +
-                        colored(settings.playerOne.getColor()) + "\t\t  0  |" + "\t\t" + colored(settings.playerTwo.getColor()) + "\\   0  \n" +
-                        colored(settings.playerOne.getColor()) + "\t\t--+--|" + "\t\t" + colored(settings.playerTwo.getColor()) + " \\--+--  " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerOne.getName(), settings.playerOne.getLives(), generateHealthBar(settings.playerOne.getLives())) +
-                        colored(settings.playerOne.getColor()) + "\t\t / \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "   / \\   " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
-                        colored(settings.playerOne.getColor()) + "\t\t/   \\" + "\t\t" + colored(settings.playerTwo.getColor()) + "  /   \\\n" +
-                        colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
-                        colored(Color.BLUE_BRIGHT) + "\t\t (Defend)\t\t\t " + colored(Color.RED_BRIGHT) + "(Attack)\n" + colored(Color.RESET);
+        return String.format("%s%s %sＡＴＴＡＣＫＳ %s%s with %d Damage\n", colored(settings.playerTwo.getColor()), settings.playerTwo.getName(), colored(Color.RED_BRIGHT), colored(settings.playerOne.getColor()), settings.playerOne.getName(), settings.playerTwo.getDamage()) +
+                colored(settings.playerOne.getColor()) + "\t\t  0  |" + "\t\t" + colored(settings.playerTwo.getColor()) + "\\   0  \n" +
+                colored(settings.playerOne.getColor()) + "\t\t--+--|" + "\t\t" + colored(settings.playerTwo.getColor()) + " \\--+--  " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerOne.getName(), settings.playerOne.getLives(), generateHealthBar(settings.playerOne.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t / \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "   / \\   " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t/   \\" + "\t\t" + colored(settings.playerTwo.getColor()) + "  /   \\\n" +
+                colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
+                colored(Color.BLUE_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Defend)\t\t\t " + colored(Color.RED_BRIGHT) + "(Attack)\n" + colored(Color.RESET);
+    }
+
+    protected String playerOneRestPlayerTwoTwoAttack() {
+        return String.format("%s%s %sＡＴＴＡＣＫＳ %s%s with %d Damage\n", colored(settings.playerTwo.getColor()), settings.playerTwo.getName(), colored(Color.RED_BRIGHT), colored(settings.playerOne.getColor()), settings.playerOne.getName(), settings.playerTwo.getDamage()) +
+                colored(settings.playerOne.getColor()) + "\t\t  0   " + "\t\t" + colored(settings.playerTwo.getColor()) + "\\   0  \n" +
+                colored(settings.playerOne.getColor()) + "\t\t--+-- " + "\t\t" + colored(settings.playerTwo.getColor()) + " \\--+--  " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerOne.getName(), settings.playerOne.getLives(), generateHealthBar(settings.playerOne.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t / \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "   / \\   " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
+                colored(settings.playerOne.getColor()) + "\t\t/   \\" + "\t\t" + colored(settings.playerTwo.getColor()) + "  /   \\\n" +
+                colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
+                colored(Color.GREEN_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Rest)\t\t\t " + colored(Color.RED_BRIGHT) + "(Attack)\n" + colored(Color.RESET);
     }
 
     protected String bothAttack() {
@@ -125,7 +143,7 @@ public class GameAssets {
                         colored(settings.playerOne.getColor()) + "\t\t / \\  " + "\t\t" + colored(settings.playerTwo.getColor()) + "   / \\   " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
                         colored(settings.playerOne.getColor()) + "\t\t/   \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "  /   \\\n" +
                         colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
-                        colored(Color.RED_BRIGHT) + "\t\t (Attack)\t\t\t " + colored(Color.RED_BRIGHT) + "(Attack)\n" + colored(Color.RESET);
+                        colored(Color.RED_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Attack)\t\t\t " + colored(Color.RED_BRIGHT) + "(Attack)\n" + colored(Color.RESET);
     }
 
     protected String bothDefend() {
@@ -135,7 +153,7 @@ public class GameAssets {
                 colored(settings.playerOne.getColor()) + "\t\t / \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + "  / \\ " + String.format("\t%s%s - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
                 colored(settings.playerOne.getColor()) + "\t\t/   \\" + "\t\t" + colored(settings.playerTwo.getColor()) + " /   \\\n" +
                 colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
-                colored(Color.BLUE_BRIGHT) + "\t\t (Defend)\t\t\t " + colored(Color.BLUE_BRIGHT) + "(Defend)\n" + colored(Color.RESET);
+                colored(Color.BLUE_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Defend)\t\t\t " + colored(Color.BLUE_BRIGHT) + "(Defend)\n" + colored(Color.RESET);
     }
 
     protected String bothRest() {
@@ -145,7 +163,7 @@ public class GameAssets {
                 colored(settings.playerOne.getColor()) + "\t\t / \\ " + "\t\t" + colored(settings.playerTwo.getColor()) + " / \\ " + String.format("\t%s%s - No Damage - %d HP:%s\n", colored(Color.BLUE_BRIGHT), settings.playerTwo.getName(), settings.playerTwo.getLives(), generateHealthBar(settings.playerTwo.getLives())) +
                 colored(settings.playerOne.getColor()) + "\t\t/   \\" + "\t\t" + colored(settings.playerTwo.getColor()) + "/   \\\n" +
                 colored(settings.playerOne.getColor()) + settings.playerOne.getName() + colored(Color.RESET) + " vs " + colored(settings.playerTwo.getColor()) + settings.playerTwo.getName() + "\n" +
-                colored(Color.GREEN_BRIGHT) + "\t\t (Rest)\t\t\t " + colored(Color.GREEN_BRIGHT) + "(Rest)\n" + colored(Color.RESET);
+                colored(Color.GREEN_BRIGHT) + " ".repeat(settings.playerOne.getName().length() / 2) + " (Rest)\t\t\t " + colored(Color.GREEN_BRIGHT) + "(Rest)\n" + colored(Color.RESET);
     }
 
     protected String playerOneWins() {
