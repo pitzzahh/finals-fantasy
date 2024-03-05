@@ -54,7 +54,7 @@ public class Game {
             );
             System.out.printf("%s>>>:%s ", assets.colored(Color.YELLOW), assets.colored(Color.RESET));
             switch (scanner.nextLine()) {
-                case "1" -> {
+                case "1":
                     System.out.printf("%s: %s%s %s: %s%s%s\n",
                             assets.colored(Color.GREEN),
                             assets.colored(Color.PURPLE),
@@ -84,7 +84,7 @@ public class Game {
                     );
                     System.out.printf("%s>>>:%s ", assets.colored(Color.YELLOW), assets.colored(Color.RESET));
                     switch (scanner.nextLine()) {
-                        case "1" -> {
+                        case "1":
                             gameMode = GameMode.HUMAN_VS_COMPUTER;
                             String humanName;
                             do {
@@ -95,7 +95,7 @@ public class Game {
                                 }
                             } while (humanName.isEmpty());
                             Color humanSelectedColor = Color.BLACK;
-                            if(gameSettings.colored) {
+                            if (gameSettings.colored) {
                                 Optional<Color> optionalColor;
                                 do {
                                     System.out.printf("%sHello mighty %s%s,%s please select your desired color%s\n",
@@ -124,23 +124,23 @@ public class Game {
                                     } else {
                                         System.out.printf("\n%sInvalid color%s\n\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
                                     }
-                                } while (optionalColor.isEmpty());
+                                } while (optionalColor.isPresent());
                             }
                             gameSettings.playerOne = new Player(humanName, humanSelectedColor);
 
                             // print a ready counter with colors
-                        }
-                        case "2" -> {
+                            break;
+                        case "2":
                             gameMode = GameMode.COMPUTER_VS_COMPUTER;
                             gameSettings.playerOne = new Player(
                                     gameSettings.generateHeroName(assets.heroNames, assets.heroNicknames, gameSettings.random),
                                     assets.generateRandomColor(gameSettings.random)
                             );
-                        }
-                        case "3" -> {
+                            break;
+                        case "3":
                             gameSettings.exit = true;
                             scanner.close();
-                        }
+                            break;
                     }
                     if (!gameSettings.exit) {
                         System.out.printf("%sTHE %sBATTLE%s BEGINS IN\n",
@@ -160,16 +160,16 @@ public class Game {
                         );
                         gamePlay(scanner);
                     }
-                }
-                case "2" -> {
+                    break;
+                case "2":
                     gameSettings.exit = true;
                     scanner.close();
-                }
-                default -> {
+                    break;
+                default:
                     System.out.printf("%sInvalid input%s\n", assets.colored(Color.RED_BOLD), assets.colored(Color.RESET));
                     System.out.printf("\n%sPress any to retry%s", assets.colored(Color.YELLOW), assets.colored(Color.RESET));
                     scanner.nextLine();
-                }
+                    break;
             }
         }
     }
@@ -179,7 +179,7 @@ public class Game {
         while (gameSettings.playerOne.getLives() >= 1 && gameSettings.playerTwo.getLives() >= 1) {
             int computerChoice = gameSettings.random.nextInt(5);
             switch (gameMode) {
-                case HUMAN_VS_COMPUTER -> {
+                case HUMAN_VS_COMPUTER:
                     String userInput;
                     do {
                         System.out.println("Choose your action:");
@@ -191,7 +191,7 @@ public class Game {
                         userInput = scanner.nextLine();
 
                         switch (userInput) {
-                            case "1" -> {
+                            case "1":
                                 gameSettings.playerOne.attack(gameSettings.playerTwo);
                                 computerChoice = gameSettings.random.nextInt(4) + 1;
                                 if (computerChoice == 1) { // one attack
@@ -210,8 +210,8 @@ public class Game {
                                     gameSettings.playerTwo.rest();
                                     System.out.println(assets.playerOneAttack());
                                 }
-                            }
-                            case "2" -> {
+                                break;
+                            case "2":
                                 gameSettings.playerOne.defend();
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
@@ -220,8 +220,8 @@ public class Game {
                                     gameSettings.playerTwo.defend();
                                     System.out.println(assets.bothDefend());
                                 }
-                            }
-                            case "3" -> {
+                                break;
+                            case "3":
                                 gameSettings.playerOne.rest();
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
@@ -231,12 +231,14 @@ public class Game {
                                     gameSettings.playerTwo.rest();
                                     System.out.println(assets.bothRest());
                                 }
-                            }
-                            default -> System.out.println("Invalid input. Please enter 1 for Attack or 2 for Defend.");
+                                break;
+                            default:
+                                System.out.println("Invalid input. Please enter 1 for Attack or 2 for Defend.");
+                                break;
                         }
                     } while (!userInput.equals("1") && !userInput.equals("2") && !userInput.equals("3"));
-                }
-                case COMPUTER_VS_COMPUTER -> {
+                    break;
+                case COMPUTER_VS_COMPUTER:
                     if (computerChoice == 0) { // one attack
                         gameSettings.playerTwo.defend();
                         System.out.println(assets.playerOneAttack());
@@ -254,7 +256,7 @@ public class Game {
                     } else { // both rest
                         System.out.println(assets.bothRest());
                     }
-                }
+                    break;
             }
             Thread.sleep(gameSettings.gameFreeze);
         }
