@@ -22,6 +22,12 @@
  * SOFTWARE.
  *
  */
+
+/**
+ * The Color enum is used to define the colors that can be used in the console
+ *
+ * @author Peter John Arao
+ */
 public enum Color {
     RESET("\033[0m"),
     BLACK("\033[0;30m"),

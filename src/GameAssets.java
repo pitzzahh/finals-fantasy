@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * Contains the game assets
+ * @author Peter John Arao
+ */
 public class GameAssets {
 
     public static final String ATTACK = "(Attack)";

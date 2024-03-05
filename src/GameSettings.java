@@ -3,6 +3,8 @@ import java.util.Random;
 /**
  * The GameSettings class is responsible for managing the settings of the game.
  * It holds the game assets, player information, game mode, and other settings.
+ *
+ * @author Peter John Arao
  */
 public class GameSettings {
 

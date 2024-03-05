@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * The Game class extends the GameSettings class and is responsible for managing the game flow.
  * It provides methods for starting the game, selecting the game mode, and setting up players.
+ * @author Peter John Arao
  */
 public class Game {
 
@@ -179,7 +180,7 @@ public class Game {
         while (gameSettings.playerOne.getLives() >= 1 && gameSettings.playerTwo.getLives() >= 1) {
             int computerChoice = gameSettings.random.nextInt(5) + 1;
             switch (gameMode) {
-                case HUMAN_VS_COMPUTER:
+                case HUMAN_VS_COMPUTER -> {
                     String userInput;
                     do {
                         System.out.println("Choose your action:");
@@ -191,7 +192,7 @@ public class Game {
                         userInput = scanner.nextLine();
 
                         switch (userInput) {
-                            case "1":
+                            case "1" -> {
                                 gameSettings.playerOne.attack(gameSettings.playerTwo);
                                 computerChoice = gameSettings.random.nextInt(3) + 1;
                                 if (computerChoice == 1) { // one attack
@@ -210,8 +211,8 @@ public class Game {
                                     gameSettings.playerTwo.rest();
                                     System.out.println(assets.playerOneAttackPlayerTwoRest());
                                 }
-                                break;
-                            case "2":
+                            }
+                            case "2" -> {
                                 gameSettings.playerOne.defend();
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
@@ -221,8 +222,8 @@ public class Game {
                                     gameSettings.playerTwo.defend();
                                     System.out.println(assets.bothDefend());
                                 }
-                                break;
-                            case "3":
+                            }
+                            case "3" -> {
                                 gameSettings.playerOne.rest();
                                 computerChoice = gameSettings.random.nextInt(2) + 1;
                                 if (computerChoice == 1) { // two attack
@@ -232,14 +233,12 @@ public class Game {
                                     gameSettings.playerTwo.rest();
                                     System.out.println(assets.bothRest());
                                 }
-                                break;
-                            default:
-                                System.out.println("Invalid input. Please enter 1 for Attack or 2 for Defend.");
-                                break;
+                            }
+                            default -> System.out.println("Invalid input. Please enter 1 for Attack or 2 for Defend.");
                         }
                     } while (!userInput.equals("1") && !userInput.equals("2") && !userInput.equals("3"));
-                    break;
-                case COMPUTER_VS_COMPUTER:
+                }
+                case COMPUTER_VS_COMPUTER -> {
                     if (computerChoice == 1) { // one attack
                         gameSettings.playerTwo.defend();
                         System.out.println(assets.playerOneAttack());
@@ -257,7 +256,7 @@ public class Game {
                     } else { // both rest
                         System.out.println(assets.bothRest());
                     }
-                    break;
+                }
             }
             Thread.sleep(gameSettings.gameFreeze);
         }
